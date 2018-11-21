@@ -28,6 +28,7 @@ $FirstName.Location = New-Object System.Drawing.Point(10,30)
 $FirstName.Size = New-Object System.Drawing.Size(100,30)
 $Screen.Controls.Add($FirstName)
 
+#Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
 $addRowButton.Location = New-Object System.Drawing.Point(120,10)
 $addRowButton.Size = New-Object System.Drawing.Size(70,20)
