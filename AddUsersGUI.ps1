@@ -9,7 +9,7 @@ $Global:counter = 30
 
 #Creates the new rows
 $createNewRow = {
-	$Global:counter = $Global:counter + 30
+	$counter = $counter + 30
 	$newRow = New-Object System.Windows.Forms.TextBox
 	$newRow.Location = New-Object System.Drawing.Point(10,$counter)
 	$newRow.Size = New-Object System.Drawing.Size(100,$counter)
