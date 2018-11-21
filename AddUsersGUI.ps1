@@ -4,7 +4,7 @@ Add-Type -AssemblyName System.Drawing
 
 $Screen = New-Object System.Windows.Forms.Form
 $Screen.Text = "Active Directory"
-$Screen.Size = New-Object System.Drawing.Size(550,400)
+$Screen.Size = New-Object System.Drawing.Size(450,400)
 $Global:counter = 30
 
 #Creates the new rows
@@ -22,11 +22,24 @@ $Column.Text = "First Name"
 $Column.Location = New-Object System.Drawing.Point(10,10)
 $Screen.Controls.Add($Column)
 
+#Middle Initial (Optional) Title
+$ColumnM = New-Object System.Windows.Forms.Label
+$ColumnM.Text = "Middle Initial"
+$ColumnM.Location = New-Object System.Drawing.Point(120,10)
+$ColumnM.Size = New-Object System.Drawing.Size(80,20)
+$Screen.Controls.Add($ColumnM)
+
 #First Name Box
 $FirstName = New-Object System.Windows.Forms.TextBox
 $FirstName.Location = New-Object System.Drawing.Point(10,30)
 $FirstName.Size = New-Object System.Drawing.Size(100,30)
 $Screen.Controls.Add($FirstName)
+
+#Middle Initial (Optional) Name Box
+$MiddleName = New-Object System.Windows.Forms.TextBox
+$MiddleName.Location = New-Object System.Drawing.Point(140,30)
+$MiddleName.Size = New-Object System.Drawing.Size(30,30)
+$Screen.Controls.Add($MiddleName)
 
 #Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
