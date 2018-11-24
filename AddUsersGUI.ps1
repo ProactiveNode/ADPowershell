@@ -9,7 +9,7 @@ $Global:counter = 30
 
 #Creates the new rows
 $createNewRow = {
-	$counter = $counter + 30
+	$Global:counter = $Global:counter + 30
 	$newRow = New-Object System.Windows.Forms.TextBox
 	$newRow.Location = New-Object System.Drawing.Point(10,$counter)
 	$newRow.Size = New-Object System.Drawing.Size(100,$counter)
@@ -40,6 +40,12 @@ $MiddleName = New-Object System.Windows.Forms.TextBox
 $MiddleName.Location = New-Object System.Drawing.Point(140,30)
 $MiddleName.Size = New-Object System.Drawing.Size(30,30)
 $Screen.Controls.Add($MiddleName)
+
+#Last Name Box
+$FirstName = New-Object System.Windows.Forms.TextBox
+$FirstName.Location = New-Object System.Drawing.Point(200,30)
+$FirstName.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($FirstName)
 
 #Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
