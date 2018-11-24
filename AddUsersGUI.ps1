@@ -49,7 +49,7 @@ $Screen.Controls.Add($FirstName)
 
 #Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
-$addRowButton.Location = New-Object System.Drawing.Point(120,10)
+$addRowButton.Location = New-Object System.Drawing.Point(350,10)
 $addRowButton.Size = New-Object System.Drawing.Size(70,20)
 $addRowButton.Text = "Make Row"
 $addRowButton.add_Click($createNewRow)
