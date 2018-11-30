@@ -62,5 +62,13 @@ $addRowButton.Text = "Make Row"
 $addRowButton.add_Click($createNewRow)
 $Screen.Controls.Add($addRowButton)
 
+#Create Users Button
+$addUserButton = New-Object System.Windows.Forms.Button
+$addUserButton.Location = New-Object System.Drawing.Point(300,300)
+$addUserButton.Size = New-Object System.Drawing.Size(100,20)
+$addUserButton.Text = "Create Users"
+$addUserButton.add_Click($createUser)
+$Screen.Controls.Add($addUserButton) 
+
 #Displays the Final Window with everything on it
 $Screen.ShowDialog()
