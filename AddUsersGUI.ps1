@@ -16,6 +16,10 @@ $createNewRow = {
 	$Screen.Controls.Add($newRow)
 }
 
+$createUser = {
+	New-ADUser "$FirstName.Text $LastName.Text"
+}
+
 #Titles 
 $Column = New-Object System.Windows.Forms.Label
 $Column.Text = "First Name"
