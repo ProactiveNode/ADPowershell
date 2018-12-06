@@ -58,6 +58,18 @@ $FirstName.Location = New-Object System.Drawing.Point(200,30)
 $FirstName.Size = New-Object System.Drawing.Size(100,30)
 $Screen.Controls.Add($FirstName)
 
+#Select Title ComboBox
+$selectTitle = New-Object System.Windows.Forms.ComboBox
+$selectTitle.Location = New-Object System.Drawing.Point(380,30)
+$selectTitle.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($selectTitle)
+
+
+
+#---------------------------------------------------------------------------
+
+
+
 #Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
 $addRowButton.Location = New-Object System.Drawing.Point(350,10)
