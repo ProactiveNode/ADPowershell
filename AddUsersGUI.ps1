@@ -34,11 +34,11 @@ $ColumnM.Size = New-Object System.Drawing.Size(80,20)
 $Screen.Controls.Add($ColumnM)
 
 #Last Name Title
-$ColumnL = New-Object System.Windows.Forms.Label
-$ColumnL.Text = "Last Name"
-$ColumnL.Location = New-Object System.Drawing.Point(200,10)
-$ColumnL.Size = New-Object System.Drawing.Size(80,20)
-$Screen.Controls.Add($ColumnL)
+$columnL = New-Object System.Windows.Forms.Label
+$columnL.Text = "Last Name"
+$columnL.Location = New-Object System.Drawing.Point(200,10)
+$columnL.Size = New-Object System.Drawing.Size(80,20)
+$Screen.Controls.Add($columnL)
 
 #Job Title
 $jobTitle = New-Object System.Windows.Forms.Label
