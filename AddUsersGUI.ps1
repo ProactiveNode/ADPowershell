@@ -71,7 +71,7 @@ $Screen.Controls.Add($FirstName)
 
 #Select Title ComboBox
 $selectTitle = New-Object System.Windows.Forms.ComboBox
-$selectTitle.Location = New-Object System.Drawing.Point(380,30)
+$selectTitle.Location = New-Object System.Drawing.Point(340,30)
 $selectTitle.Size = New-Object System.Drawing.Size(100,30)
 
 #Hastable that contains that Titles for the Users
@@ -87,7 +87,7 @@ $Screen.Controls.Add($selectTitle)
 
 #Creates a Primary button that will allow you to create new rows
 $addRowButton = New-Object System.Windows.Forms.Button
-$addRowButton.Location = New-Object System.Drawing.Point(350,10)
+$addRowButton.Location = New-Object System.Drawing.Point(550,10)
 $addRowButton.Size = New-Object System.Drawing.Size(70,20)
 $addRowButton.Text = "Make Row"
 $addRowButton.add_Click($createNewRow)
