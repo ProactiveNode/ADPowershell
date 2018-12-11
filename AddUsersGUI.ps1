@@ -62,9 +62,13 @@ $Screen.Controls.Add($FirstName)
 $selectTitle = New-Object System.Windows.Forms.ComboBox
 $selectTitle.Location = New-Object System.Drawing.Point(380,30)
 $selectTitle.Size = New-Object System.Drawing.Size(100,30)
+
+#Hastable that contains that Titles for the Users
+$titleList = @{Accountant = "$Accountant";Developer = "$Developer"}
+$selectTitle.items.addRange($titleList.keys)
+$selectTitle.DropDownStyle = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+
 $Screen.Controls.Add($selectTitle)
-
-
 
 #---------------------------------------------------------------------------
 
