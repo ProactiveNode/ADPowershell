@@ -4,7 +4,7 @@ Add-Type -AssemblyName System.Drawing
 
 $Screen = New-Object System.Windows.Forms.Form
 $Screen.Text = "Active Directory"
-$Screen.Size = New-Object System.Drawing.Size(450,400)
+$Screen.Size = New-Object System.Drawing.Size(650,400)
 $Global:counter = 30
 
 #Creates the new rows
@@ -39,6 +39,17 @@ $ColumnL.Text = "Last Name"
 $ColumnL.Location = New-Object System.Drawing.Point(200,10)
 $ColumnL.Size = New-Object System.Drawing.Size(80,20)
 $Screen.Controls.Add($ColumnL)
+
+#Job Title
+$jobTitle = New-Object System.Windows.Forms.Label
+$jobTitle.Text = "Title"
+$jobTitle.Location = New-Object System.Drawing.Point(340,10)
+$jobTitle.Size = New-Object System.Drawing.Size(80,20)
+$Screen.Controls.Add($jobTitle)
+
+#-----------------------------------------------------------
+#End of title labels
+#-----------------------------------------------------------
 
 #First Name Box
 $FirstName = New-Object System.Windows.Forms.TextBox
