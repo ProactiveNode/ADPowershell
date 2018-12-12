@@ -64,10 +64,10 @@ $MiddleName.Size = New-Object System.Drawing.Size(30,30)
 $Screen.Controls.Add($MiddleName)
 
 #Last Name Box
-$FirstName = New-Object System.Windows.Forms.TextBox
-$FirstName.Location = New-Object System.Drawing.Point(200,30)
-$FirstName.Size = New-Object System.Drawing.Size(100,30)
-$Screen.Controls.Add($FirstName)
+$LastName = New-Object System.Windows.Forms.TextBox
+$LastName.Location = New-Object System.Drawing.Point(200,30)
+$LastName.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($LastName)
 
 #Select Title ComboBox
 $selectTitle = New-Object System.Windows.Forms.ComboBox
