@@ -24,6 +24,7 @@ $createUser = {
 $Column = New-Object System.Windows.Forms.Label
 $Column.Text = "First Name"
 $Column.Location = New-Object System.Drawing.Point(10,10)
+$Column.Size = New-Object System.Drawing.Size(80,20)
 $Screen.Controls.Add($Column)
 
 #Middle Initial (Optional) Title
