@@ -17,7 +17,8 @@ $createNewRow = {
 }
 
 $createUser = {
-	New-ADUser "$FirstName.Text $LastName.Text"
+	$fullName = $FirstName.Text[0] + "." + $LastName.Text
+	New-ADUser -Name $fullName
 }
 
 #Titles 
