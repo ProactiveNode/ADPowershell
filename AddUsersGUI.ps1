@@ -17,8 +17,9 @@ $createNewRow = {
 }
 
 $createUser = {
-	$fullName = $FirstName.Text[0] + "." + $LastName.Text
-	New-ADUser -Name $fullName
+	$fullName = $FirstName.Text + " " + $LastName.Text
+	$emailAddr = $FirstName.Text[0] + "." + $LastName.Text + "@magicTestDomain.test"
+	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text
 }
 
 #Titles 
