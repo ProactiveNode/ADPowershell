@@ -1,6 +1,7 @@
 #Creates Base Window
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName PresentationFramework
 
 $Screen = New-Object System.Windows.Forms.Form
 $Screen.Text = "Active Directory"
@@ -20,6 +21,11 @@ $createUser = {
 	$fullName = $FirstName.Text + " " + $LastName.Text
 	$emailAddr = $FirstName.Text[0] + "." + $LastName.Text + "@magicTestDomain.test"
 	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text
+	if ($?) {
+		$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
+	} else {
+		$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
+	}
 }
 
 #Titles 
