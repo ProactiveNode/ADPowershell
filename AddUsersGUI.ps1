@@ -20,7 +20,9 @@ $createNewRow = {
 $createUser = {
 	$fullName = $FirstName.Text + " " + $LastName.Text
 	$emailAddr = $FirstName.Text[0] + "." + $LastName.Text + "@magicTestDomain.test"
-	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text
+	$defaultPassword = ConvertTo-SecureString -String "P@55c0de1" -AsPlainText -Force
+	
+	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword 
 	if ($?) {
 		$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
 	} else {
