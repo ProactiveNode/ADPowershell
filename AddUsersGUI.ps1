@@ -25,6 +25,10 @@ $createUser = {
 	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword 
 	if ($?) {
 		$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
+		$FirstName.Clear()
+		$MiddleName.Clear()
+		$LastName.Clear()
+		$selectTitle.SelectedIndex = -1
 	} else {
 		$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
 	}
