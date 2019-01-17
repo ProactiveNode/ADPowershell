@@ -11,7 +11,6 @@ $Screen.Size = New-Object System.Drawing.Size(440,290)
 $Global:counter = 30
 
 $createUser = {
-	Write-host $passwordTextBox.Text
 	if ($firstName.Text -eq '' -And $lastName.Text -eq '' -And $selectTitle.Text -eq '') {
 		#Write-Host "Fields are empty"
 	} elseif ($firstName.Text -ne '' -And $lastName.Text -eq '' -And $selectTitle.Text -eq '') {
@@ -31,10 +30,12 @@ $createUser = {
 	}else {
 		$fullName = $firstName.Text + " " + $lastName.Text
 		$emailAddr = $firstName.Text[0] + "." + $lastName.Text + "@magicTestDomain.test"
-		$defaultPassword = $passwordTextBox.Text | ConvertTo-SecureString 
+		$defaultPassword = $passwordTextBox.Text | ConvertTo-SecureString -AsPlainText -Force
 		New-ADUser -Name $fullName -GivenName $firstName.Text -Surname $lastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword
 		if ($?) {
-			
+			if ($selectTitle.Text -eq 'Accountant') {
+                $addAccountant = @("Account-Grp","Chicago"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
+            }
 			$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
 		} else {
 			$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
