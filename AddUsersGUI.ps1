@@ -5,60 +5,122 @@ Add-Type -AssemblyName PresentationFramework
 
 $Screen = New-Object System.Windows.Forms.Form
 $Screen.Text = "Active Directory"
-$Screen.Size = New-Object System.Drawing.Size(650,400)
-$Global:counter = 30
+$Screen.Size = New-Object System.Drawing.Size(440,290)
 
-#Creates the new rows
-$createNewRow = {
-	$Global:counter = $Global:counter + 30
-	$newRow = New-Object System.Windows.Forms.TextBox
-	$newRow.Location = New-Object System.Drawing.Point(10,$counter)
-	$newRow.Size = New-Object System.Drawing.Size(100,$counter)
-	$Screen.Controls.Add($newRow)
-}
 
 $createUser = {
-	$fullName = $FirstName.Text + " " + $LastName.Text
-	$emailAddr = $FirstName.Text[0] + "." + $LastName.Text + "@magicTestDomain.test"
-	$defaultPassword = ConvertTo-SecureString -String "P@55c0de1" -AsPlainText -Force
-	
-	New-ADUser -Name $fullName -GivenName $FirstName.Text -Surname $LastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword 
-	if ($?) {
-		$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
-		$FirstName.Clear()
-		$MiddleName.Clear()
-		$LastName.Clear()
-		$selectTitle.SelectedIndex = -1
+	if ($firstName.Text -eq '' -And $lastName.Text -eq '' -And $selectTitle.Text -eq '') {
+	} elseif ($firstName.Text -ne '' -And $lastName.Text -eq '' -And $selectTitle.Text -eq '') {
+		Write-host "Error First Row: Missing Last Name and Title"
+	} elseif ($firstName.Text -eq '' -And $lastName.Text -ne '' -And $selectTitle.Text -eq '') {
+		Write-host "Error First Row: Missing First Name and Title"
+	} elseif ($firstName.Text -ne '' -And $lastName.Text -ne '' -And $selectTitle.Text -eq '') {
+		Write-Host "Error First Row: Empty Title"
+	} elseif ($firstName.Text -eq '' -And $lastName.Text -eq '' -And $selectTitle.Text -ne '') {
+		Write-Host "Error First Row: Missing First and Last Name"
+	} elseif ($firstName.Text -eq '' -And $lastName.Text -eq '' -And $selectTitle.Text -ne '') {
+		Write-Host "Error First Row: Missing First and Last Name"
+	} elseif ($firstName.Text -eq '' -And $lastName.Text -ne '' -And $selectTitle.Text -ne '') {
+		Write-Host "Error First Row: Missing First Name"
+	} elseif ($firstName.Text -ne '' -And $lastName.Text -eq '' -And $selectTitle.Text -ne '') {
+		Write-Host "Error First Row: Missing Last Name"
+	} elseif ($firstName.Text -ne '' -And $lastName.Text -ne '' -And $selectTitle.Text -ne '' -And $passwordTextBox.Text -eq '') {
+		Write-Host "Error: Missing Default Password"
 	} else {
-		$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
+		$fullName = $firstName.Text + " " + $lastName.Text
+		$emailAddr = $firstName.Text[0] + "." + $lastName.Text + "@magicTestDomain.test"
+		$defaultPassword = $passwordTextBox.Text | ConvertTo-SecureString -AsPlainText -Force
+		New-ADUser -Name $fullName -GivenName $firstName.Text -Surname $lastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword
+		if ($?) {
+			if ($selectTitle.Text -eq 'Accountant') {
+                $addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
+            } elseif ($selectTitle.Text -eq 'Accountant') {
+                $addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
+            }
+			$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
+			$FirstName.Clear()
+			$LastName.Clear()
+			$selectTitle.SelectedIndex = -1
+		} else {
+			$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
+		}
+	}
+	
+	if ($firstName2.Text -eq '' -And $lastName2.Text -eq '' -And $selectTitle2.Text -eq '') {
+	} elseif ($firstName2.Text -ne '' -And $lastName2.Text -eq '' -And $selectTitle2.Text -eq '') {
+		Write-host "Error Second Row: Missing Last Name"
+	} elseif ($firstName2.Text -eq '' -And $lastName2.Text -ne '' -And $selectTitle2.Text -eq '') {
+		Write-host "Error Second Row: Missing First Name"
+	} elseif ($firstName2.Text -ne '' -And $lastName2.Text -ne '' -And $selectTitle2.Text -eq '') {
+		Write-Host "Error Second Row: Missing Title"
+	} elseif ($firstName2.Text -eq '' -And $lastName2.Text -eq '' -And $selectTitle2.Text -ne '') {
+		Write-Host "Error Second Row: Missing First and Last Name"
+	} elseif ($firstName2.Text -eq '' -And $lastName2.Text -ne '' -And $selectTitle2.Text -ne '') {
+		Write-Host "Error Second Row: Missing First Name"
+	} elseif ($firstName2.Text -ne '' -And $lastName2.Text -eq '' -And $selectTitle2.Text -ne '') {
+		Write-Host "Error Second Row: Missing Last Name"
+	} elseif ($firstName2.Text -ne '' -And $lastName2.Text -ne '' -And $selectTitle2.Text -ne '' -And $passwordTextBox.Text -eq '') {
+		Write-Host "Error: Missing Default Password"
+	} else {
+		$fullName = $firstName2.Text + " " + $lastName2.Text
+		$emailAddr2 = $firstName2.Text[0] + "." + $lastName2.Text + "@magicTestDomain.test"
+		$defaultPassword2 = $passwordTextBox.Text | ConvertTo-SecureString -AsPlainText -Force
+		New-ADUser -Name $fullName -GivenName $firstName2.Text -Surname $lastName2.Text -EmailAddress $emailAddr2 -Title $selectTitle2.Text -AccountPassword $defaultPassword2
+		if ($?) {
+			if ($selectTitle.Text -eq 'Accountant') {
+                $addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
+            } elseif ($selectTitle.Text -eq 'Accountant') {
+                $addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
+            }
+			$FirstName2.Clear()
+			$LastName2.Clear()
+			$selectTitle2.SelectedIndex = -1
+			$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
+		} else {
+			$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
+		}
 	}
 }
+#-----------------------
+$colL = 10
+$col1 = 40
+$col2 = 160
+$col3 = 280
+$counter = 30
+#-----------------------
+#Labels
+#-----------------------
+
+$row1 = New-Object System.Windows.Forms.Label
+$row1.Text = 1
+$row1.Location = New-Object System.Drawing.Point(10,$counter)
+$row1.Size = New-Object System.Drawing.Size(20,30)
+$Screen.Controls.Add($row1)
+	
+$row2 = New-Object System.Windows.Forms.Label
+$row2.Text = 2
+$row2.Location = New-Object System.Drawing.Point(10,($counter*2))
+$row2.Size = New-Object System.Drawing.Size(20,30)
+$Screen.Controls.Add($row2)
 
 #Titles 
-$Column = New-Object System.Windows.Forms.Label
-$Column.Text = "First Name"
-$Column.Location = New-Object System.Drawing.Point(10,10)
-$Column.Size = New-Object System.Drawing.Size(80,20)
-$Screen.Controls.Add($Column)
-
-#Middle Initial (Optional) Title
-$ColumnM = New-Object System.Windows.Forms.Label
-$ColumnM.Text = "Middle Initial"
-$ColumnM.Location = New-Object System.Drawing.Point(120,10)
-$ColumnM.Size = New-Object System.Drawing.Size(80,20)
-$Screen.Controls.Add($ColumnM)
+$labelFirst = New-Object System.Windows.Forms.Label
+$labelFirst.Text = "First Name"
+$labelFirst.Location = New-Object System.Drawing.Point($col1,10)
+$labelFirst.Size = New-Object System.Drawing.Size(80,20)
+$Screen.Controls.Add($labelFirst)
 
 #Last Name Title
-$columnL = New-Object System.Windows.Forms.Label
-$columnL.Text = "Last Name"
-$columnL.Location = New-Object System.Drawing.Point(200,10)
-$columnL.Size = New-Object System.Drawing.Size(80,20)
-$Screen.Controls.Add($columnL)
+$labelLast = New-Object System.Windows.Forms.Label
+$labelLast.Text = "Last Name"
+$labelLast.Location = New-Object System.Drawing.Point($col2,10)
+$labelLast.Size = New-Object System.Drawing.Size(80,20)
+$Screen.Controls.Add($labelLast)
 
 #Job Title
 $jobTitle = New-Object System.Windows.Forms.Label
 $jobTitle.Text = "Title"
-$jobTitle.Location = New-Object System.Drawing.Point(340,10)
+$jobTitle.Location = New-Object System.Drawing.Point($col3,10)
 $jobTitle.Size = New-Object System.Drawing.Size(80,20)
 $Screen.Controls.Add($jobTitle)
 
@@ -67,50 +129,64 @@ $Screen.Controls.Add($jobTitle)
 #-----------------------------------------------------------
 
 #First Name Box
-$FirstName = New-Object System.Windows.Forms.TextBox
-$FirstName.Location = New-Object System.Drawing.Point(10,30)
-$FirstName.Size = New-Object System.Drawing.Size(100,30)
-$Screen.Controls.Add($FirstName)
+$firstName = New-Object System.Windows.Forms.TextBox
+$firstName.Location = New-Object System.Drawing.Point($col1,30)
+$firstName.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($firstName)
 
-#Middle Initial (Optional) Name Box
-$MiddleName = New-Object System.Windows.Forms.TextBox
-$MiddleName.Location = New-Object System.Drawing.Point(140,30)
-$MiddleName.Size = New-Object System.Drawing.Size(30,30)
-$Screen.Controls.Add($MiddleName)
+$firstName2 = New-Object System.Windows.Forms.TextBox
+$firstName2.Location = New-Object System.Drawing.Point($col1,60)
+$firstName2.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($firstName2)
 
 #Last Name Box
-$LastName = New-Object System.Windows.Forms.TextBox
-$LastName.Location = New-Object System.Drawing.Point(200,30)
-$LastName.Size = New-Object System.Drawing.Size(100,30)
-$Screen.Controls.Add($LastName)
+$lastName = New-Object System.Windows.Forms.TextBox
+$lastName.Location = New-Object System.Drawing.Point($col2,30)
+$lastName.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($lastName)
+
+$lastName2 = New-Object System.Windows.Forms.TextBox
+$lastName2.Location = New-Object System.Drawing.Point($col2,60)
+$lastName2.Size = New-Object System.Drawing.Size(100,30)
+$Screen.Controls.Add($lastName2)
 
 #Select Title ComboBox
 $selectTitle = New-Object System.Windows.Forms.ComboBox
-$selectTitle.Location = New-Object System.Drawing.Point(340,30)
+$selectTitle.Location = New-Object System.Drawing.Point($col3,30)
 $selectTitle.Size = New-Object System.Drawing.Size(100,30)
 
+$selectTitle2 = New-Object System.Windows.Forms.ComboBox
+$selectTitle2.Location = New-Object System.Drawing.Point($col3,60)
+$selectTitle2.Size = New-Object System.Drawing.Size(100,30)
+
+$titleList2 = @{'' = ""; Accountant = "$Accountant"; Developer = "$Developer"}
+$selectTitle2.items.addRange($titleList2.keys)
+$selectTitle2.DropDownStyle = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+$Screen.Controls.Add($selectTitle2)
+
 #Hastable that contains that Titles for the Users
-$titleList = @{Accountant = "$Accountant";Developer = "$Developer"}
+$titleList = @{'' = ""; Accountant = "$Accountant"; Developer = "$Developer"}
 $selectTitle.items.addRange($titleList.keys)
 $selectTitle.DropDownStyle = [System.Windows.Forms.ComboBoxStyle]::DropDownList
 
 $Screen.Controls.Add($selectTitle)
 
 #---------------------------------------------------------------------------
+$labelPass = New-Object System.Windows.Forms.Label
+$labelPass.Text = "Enter Default Password for New Users"
+$labelPass.Location = New-Object System.Drawing.Point(30,150)
+$labelPass.Size = New-Object System.Drawing.Size(250,20)
+$Screen.Controls.Add($labelPass)
 
-
-
-#Creates a Primary button that will allow you to create new rows
-$addRowButton = New-Object System.Windows.Forms.Button
-$addRowButton.Location = New-Object System.Drawing.Point(550,10)
-$addRowButton.Size = New-Object System.Drawing.Size(70,20)
-$addRowButton.Text = "Make Row"
-$addRowButton.add_Click($createNewRow)
-$Screen.Controls.Add($addRowButton)
+$passwordTextBox = New-Object System.Windows.Forms.MaskedTextBox
+$passwordTextBox.Location = New-Object System.Drawing.Point(30,170)
+$passwordTextBox.Size = New-Object System.Drawing.Size(80,60)
+$passwordTextBox.PasswordChar = "*"
+$Screen.Controls.Add($passwordTextBox)
 
 #Create Users Button
 $addUserButton = New-Object System.Windows.Forms.Button
-$addUserButton.Location = New-Object System.Drawing.Point(300,300)
+$addUserButton.Location = New-Object System.Drawing.Point(180,200)
 $addUserButton.Size = New-Object System.Drawing.Size(100,20)
 $addUserButton.Text = "Create Users"
 $addUserButton.add_Click($createUser)
