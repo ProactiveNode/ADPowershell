@@ -33,17 +33,17 @@ $createUser = {
 		New-ADUser -Name $fullName -GivenName $firstName.Text -Surname $lastName.Text -EmailAddress $emailAddr -Title $selectTitle.Text -AccountPassword $defaultPassword
 		if ($?) {
 			if ($selectTitle.Text -eq 'Accountant') {
-                $addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
-            } elseif ($selectTitle.Text -eq 'Accountant') {
-                $addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
-            }
+                		$addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
+            		} elseif ($selectTitle.Text -eq 'Accountant') {
+                		$addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName -MemberOf $Grp }
+            		}
 			$popupComplete = [System.Windows.MessageBox]::Show('User has been created','Completed')
 			$FirstName.Clear()
 			$LastName.Clear()
 			$selectTitle.SelectedIndex = -1
-		} else {
+            	} else {
 			$popupFailed = [System.Windows.MessageBox]::Show('User failed to be created','Failed','Ok','Error')
-		}
+	    	}
 	}
 	
 	if ($firstName2.Text -eq '' -And $lastName2.Text -eq '' -And $selectTitle2.Text -eq '') {
@@ -68,10 +68,10 @@ $createUser = {
 		New-ADUser -Name $fullName -GivenName $firstName2.Text -Surname $lastName2.Text -EmailAddress $emailAddr2 -Title $selectTitle2.Text -AccountPassword $defaultPassword2
 		if ($?) {
 			if ($selectTitle.Text -eq 'Accountant') {
-                $addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
-            } elseif ($selectTitle.Text -eq 'Accountant') {
-                $addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
-            }
+                		$addAccountant = @("Account-Grp","Chicago-Office"); ForEach ($grp in $addAccountant) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
+            		} elseif ($selectTitle.Text -eq 'Accountant') {
+                		$addDev = @("Developers-Grp","Chicago-Office"); ForEach ($grp in $addDev) {Add-ADPrincipalGroupMembership $fullName2 -MemberOf $Grp }
+            		}
 			$FirstName2.Clear()
 			$LastName2.Clear()
 			$selectTitle2.SelectedIndex = -1
